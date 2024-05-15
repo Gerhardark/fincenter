@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "638147490303",
+    "firebase_url": "https://fincenter-chile-default-rtdb.firebaseio.com",
+    "project_id": "fincenter-chile",
+    "storage_bucket": "fincenter-chile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638147490303:android:7c187cf202862af19d37ca",
+        "android_client_info": {
+          "package_name": "fincenter.cl.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQWMD1W6KF4ge5oHOEtu60DeVRdr29CaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
