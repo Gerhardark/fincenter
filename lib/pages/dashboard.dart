@@ -45,18 +45,7 @@ class _DashBoard extends State<DashBoard> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (currentUser.emailVerified)
-              Text('tu email esta Verificado')
-            else(
-            Text(
-              "Tu email no esta ferificado",
-              style: TextStyle(fontSize: 20),
-            )
-            ),
-            Text(
-              "Current User Name: ${currentUser.displayName ?? ""}",
-              style: TextStyle(fontSize: 20),
-            ),
+            Text("hola ${currentUser.email ?? ""}"),
           ],
         ),
       ),
