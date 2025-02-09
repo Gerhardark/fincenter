@@ -8,6 +8,10 @@ import 'package:app/preferences/user_preferences.dart';
 import 'package:app/pages/account.dart';
 import 'package:app/pages/documents.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:app/pages/advisors.dart';
+import 'package:app/pages/courses.dart';
+import 'package:app/pages/investing.dart';
+import 'package:app/pages/news.dart';
 
 
 void main() async{
@@ -47,7 +51,11 @@ class MyApp extends StatelessWidget {
         NewUser.routename: (context) => NewUser(),
         DashBoard.routename: (context) => DashBoard(),
         Account.routename: (context) => Account(),
-        Documents.routename: (context) => Documents()
+        Documents.routename: (context) => Documents(),
+        Advisors.routename: (context) => Advisors(),
+        Courses.routename: (context) => Courses(),
+        Investing.routename: (context) => Investing(),
+        News.routename: (context) => News(),
       }
     );
   }

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-class Documents extends StatefulWidget {
+class Courses extends StatefulWidget {
 
-  static const String routename = "Documents";
-  const Documents({super.key});
+  static const String routename = "Courses";
+  const Courses({super.key});
 
   @override
-  State<Documents> createState() => _Documents();
+  State<Courses> createState() => _Courses();
 }
 
-class _Documents extends State<Documents> {
+class _Courses extends State<Courses> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final databaseReference = FirebaseDatabase.instance.ref('usuarios');
   String nombre = '';
@@ -37,7 +37,7 @@ class _Documents extends State<Documents> {
 
     return Scaffold (
         appBar: AppBar (
-          title: Text("Documentos"),
+          title: Text("Cursos"),
           centerTitle: true,
         ),
         body: Center (

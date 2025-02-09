@@ -1,7 +1,14 @@
 import 'package:app/pages/account.dart';
+import 'package:app/pages/documents.dart';
+import 'package:app/pages/advisors.dart';
+import 'package:app/pages/investing.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'courses.dart';
 import 'login_page.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'news.dart';
+
 
 class DashBoard extends StatefulWidget {
 
@@ -18,6 +25,20 @@ class _DashBoard extends State<DashBoard> {
   Widget build(BuildContext context) {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     User? currentUser = _auth.currentUser;
+    final databaseReference = FirebaseDatabase.instance.ref();
+
+    Future<void> guardarTarea() async {
+      try {
+        await databaseReference.child('usuarios').child(currentUser!.uid).set({
+          'Tittle': 'Depositos a plazo',
+          'Description': 'Los depositos a plazo son formas de invertir pensadas en el corto plazo, que tienen una rentabilidad establecida en un periodo fijado.',
+          'likes': 0,
+        });
+        print('Tarea guardada correctamente');
+      } catch (e) {
+        print('Error al guardar la tarea: $e');
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -46,6 +67,11 @@ class _DashBoard extends State<DashBoard> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text("hola ${currentUser.email ?? ""}"),
+            Text("hola ${currentUser.uid}"),
+            ElevatedButton(
+              onPressed: guardarTarea,
+              child: Text('Guardar Tarea'),
+            ),
           ],
         ),
       ),
@@ -66,9 +92,22 @@ class _DashBoard extends State<DashBoard> {
               },
             ),
             ListTile(
+              title: const Text("Asesoría"),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Advisors())
+                );
+              },
+            ),
+
+            ListTile(
               title: const Text("Documentos"),
               onTap: () {
-                null;
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Documents())
+                );
               },
             ),
             ListTile(
@@ -99,7 +138,74 @@ class _DashBoard extends State<DashBoard> {
             ),
           ],
         ),
-      )
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround, // Espacio entre iconos
+          children: [
+            Column( // Para centrar el icono y el texto verticalmente
+              mainAxisSize: MainAxisSize.min, // Ajusta el tamaño al mínimo necesario
+              children: [
+                IconButton(
+                  icon: Icon(Icons.home),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DashBoard())
+                    );
+                  },
+                ),
+                Text("Inicio", style: TextStyle(fontSize: 11)), // Texto debajo del icono
+              ],
+            ),
+            Column( // Para centrar el icono y el texto verticalmente
+              mainAxisSize: MainAxisSize.min, // Ajusta el tamaño al mínimo necesario
+              children: [
+                IconButton(
+                  icon: Icon(Icons.school),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Courses())
+                    );
+                  },
+                ),
+                Text("Cursos", style: TextStyle(fontSize: 11)), // Texto debajo del icono
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.insights),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Investing())
+                    );
+                  },
+                ),
+                Text("Oportunidades", style: TextStyle(fontSize: 11)),
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.bolt),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => News())
+                    );
+                  },
+                ),
+                Text("Noticias", style: TextStyle(fontSize: 11)),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

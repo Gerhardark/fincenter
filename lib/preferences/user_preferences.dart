@@ -10,7 +10,13 @@ class PreferenciasUsuarios {
     return _prefs.getString('ultimaPagina')?? 'login';
   }
   set ultimaPagina(String value) {
-    _prefs.setString('ultimaPagina', value);
+    if (value == '/dashboard') {
+      _prefs.remove('ultimaPagina'); // Elimina la preferencia para que get ultimaPagina devuelva null
+      // Opcionalmente, puedes usar un valor especial:
+      // _prefs.setString('ultimaPagina', 'null');
+    } else {
+      _prefs.setString('ultimaPagina', value);
+    }
   }
 }
 
