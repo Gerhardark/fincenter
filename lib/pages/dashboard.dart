@@ -9,9 +9,7 @@ import 'login_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'news.dart';
 
-
 class DashBoard extends StatefulWidget {
-
   static const String routename = "DashBoard";
   const DashBoard({super.key});
 
@@ -20,7 +18,6 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoard extends State<DashBoard> {
-
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -30,9 +27,11 @@ class _DashBoard extends State<DashBoard> {
     Future<void> guardarTarea() async {
       try {
         await databaseReference.child('usuarios').child(currentUser!.uid).set({
-          'Tittle': 'Depositos a plazo',
-          'Description': 'Los depositos a plazo son formas de invertir pensadas en el corto plazo, que tienen una rentabilidad establecida en un periodo fijado.',
-          'likes': 0,
+          'name': 'Gerhard',
+          'phone': '56951170549',
+          'rut': '18014159-6',
+          'lastNameFather': 'Reinike',
+          'lastNameMother': 'Seidel',
         });
         print('Tarea guardada correctamente');
       } catch (e) {
@@ -50,14 +49,17 @@ class _DashBoard extends State<DashBoard> {
               null;
             },
             child: currentUser!.emailVerified
-                  ? Padding(
-                      padding: EdgeInsets.only(right: 16.0), // Adjust padding as needed
-                      child: Icon(Icons.email, color: Color.fromRGBO(24, 154, 180, 1)),
-                    )
-                  : Padding(
-                      padding: EdgeInsets.only(right: 16.0), // Adjust padding as needed
-                      child: Icon(Icons.email, color: Colors.redAccent),
-                    ),
+                ? Padding(
+                    padding: EdgeInsets.only(
+                        right: 16.0), // Adjust padding as needed
+                    child: Icon(Icons.email,
+                        color: Color.fromRGBO(24, 154, 180, 1)),
+                  )
+                : Padding(
+                    padding: EdgeInsets.only(
+                        right: 16.0), // Adjust padding as needed
+                    child: Icon(Icons.email, color: Colors.redAccent),
+                  ),
           ),
         ],
       ),
@@ -70,7 +72,7 @@ class _DashBoard extends State<DashBoard> {
             Text("hola ${currentUser.uid}"),
             ElevatedButton(
               onPressed: guardarTarea,
-              child: Text('Guardar Tarea'),
+              child: Text('Guardar datos'),
             ),
           ],
         ),
@@ -80,34 +82,27 @@ class _DashBoard extends State<DashBoard> {
           children: [
             DrawerHeader(
               child: Image.asset('assets/logo_fincenter_square.png'),
-              padding: EdgeInsets.only(top: 20, bottom:20),
+              padding: EdgeInsets.only(top: 20, bottom: 20),
             ),
             ListTile(
               title: const Text("Mi cuenta"),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Account())
-                );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Account()));
               },
             ),
             ListTile(
               title: const Text("Asesoría"),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Advisors())
-                );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Advisors()));
               },
             ),
-
             ListTile(
               title: const Text("Documentos"),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Documents())
-                );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Documents()));
               },
             ),
             ListTile(
@@ -127,10 +122,8 @@ class _DashBoard extends State<DashBoard> {
                       backgroundColor: Colors.redAccent,
                     ),
                   );
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage())
-                  );
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
                 } on FirebaseAuthException catch (e) {
                   print(e.message); // Handle errors (e.g., sign-out failed)
                 }
@@ -141,36 +134,39 @@ class _DashBoard extends State<DashBoard> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround, // Espacio entre iconos
+          mainAxisAlignment:
+              MainAxisAlignment.spaceAround, // Espacio entre iconos
           children: [
-            Column( // Para centrar el icono y el texto verticalmente
-              mainAxisSize: MainAxisSize.min, // Ajusta el tamaño al mínimo necesario
+            Column(
+              // Para centrar el icono y el texto verticalmente
+              mainAxisSize:
+                  MainAxisSize.min, // Ajusta el tamaño al mínimo necesario
               children: [
                 IconButton(
                   icon: Icon(Icons.home),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => DashBoard())
-                    );
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => DashBoard()));
                   },
                 ),
-                Text("Inicio", style: TextStyle(fontSize: 11)), // Texto debajo del icono
+                Text("Inicio",
+                    style: TextStyle(fontSize: 11)), // Texto debajo del icono
               ],
             ),
-            Column( // Para centrar el icono y el texto verticalmente
-              mainAxisSize: MainAxisSize.min, // Ajusta el tamaño al mínimo necesario
+            Column(
+              // Para centrar el icono y el texto verticalmente
+              mainAxisSize:
+                  MainAxisSize.min, // Ajusta el tamaño al mínimo necesario
               children: [
                 IconButton(
                   icon: Icon(Icons.school),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Courses())
-                    );
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Courses()));
                   },
                 ),
-                Text("Cursos", style: TextStyle(fontSize: 11)), // Texto debajo del icono
+                Text("Cursos",
+                    style: TextStyle(fontSize: 11)), // Texto debajo del icono
               ],
             ),
             Column(
@@ -179,10 +175,8 @@ class _DashBoard extends State<DashBoard> {
                 IconButton(
                   icon: Icon(Icons.insights),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Investing())
-                    );
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Investing()));
                   },
                 ),
                 Text("Oportunidades", style: TextStyle(fontSize: 11)),
@@ -194,10 +188,8 @@ class _DashBoard extends State<DashBoard> {
                 IconButton(
                   icon: Icon(Icons.bolt),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => News())
-                    );
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => News()));
                   },
                 ),
                 Text("Noticias", style: TextStyle(fontSize: 11)),
